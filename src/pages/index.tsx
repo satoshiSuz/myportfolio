@@ -1,10 +1,11 @@
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import Layout from '@/components/Layout';
+import Layout, { siteTitle } from '@/components/Layout';
 import utilStyle from '../styles/utils.module.css';
 import Link from 'next/link';
 import { getPostsData } from '@/lib/post';
 import type { NextPage, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -32,10 +33,13 @@ export const getStaticProps = async () => {
 const Home: NextPage<Props> = (props) => {
   const { allPostsData } = props;
   return (
-    <Layout>
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
       <section className={utilStyle.headingMd}>
         <p>
-          {/* 私はフロントエンドエンジニアで、UI/UX設計やバックエンド開発の経験もあります。得意な言語はTypeScriptです。 */}
+          私はフロントエンドエンジニアで、UI/UX設計やバックエンド開発の経験もあります。得意な言語はTypeScriptです。
         </p>
       </section>
       <section className={`${utilStyle.headingMd} ${utilStyle.padding1px}`}>
