@@ -42,7 +42,7 @@ export const AppList = () => {
       <Wrap ps='3'>
         {apps.map((app) => {
           return (
-            <WrapItem>
+            <WrapItem key={app.name}>
               <NextLink href={app.url}>
                 <Box
                   w={{ base: '230px', md: '240px' }}
@@ -55,7 +55,11 @@ export const AppList = () => {
                   borderRadius='md'
                 >
                   <VStack>
-                    <Image src={app.image} h={{ base: '60px', md: '70px' }} />
+                    <Image
+                      src={app.image}
+                      h={{ base: '60px', md: '70px' }}
+                      alt={app.name}
+                    />
                     <Text fontSize={{ base: 'sm', md: 'md' }}>{app.name}</Text>
                     <Divider color='gray.200' />
                     <Box>

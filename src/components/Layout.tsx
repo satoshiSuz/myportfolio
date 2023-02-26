@@ -27,6 +27,7 @@ const Layout: FC<Props> = (props) => {
               borderRadius='full'
               w={{ base: '50px', md: '100px' }}
               src='/images/profile.jpeg'
+              alt='profile'
             />
             <Heading
               fontSize={{ base: 'xl', md: '3xl' }}
