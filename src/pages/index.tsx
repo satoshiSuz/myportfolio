@@ -1,64 +1,75 @@
-import { Inter } from '@next/font/google';
-import styles from '@/styles/Home.module.css';
+import { MdCheckBox } from 'react-icons/md';
 import Layout, { siteTitle } from '@/components/Layout';
-import utilStyle from '../styles/utils.module.css';
-import Link from 'next/link';
-import { getPostsData } from '@/lib/post';
-import type { NextPage, InferGetStaticPropsType } from 'next';
+import NextLink from 'next/link';
+import type { NextPage } from 'next';
 import Head from 'next/head';
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  Divider,
+  Flex,
+  Heading,
+  Image,
+  List,
+  ListIcon,
+  ListItem,
+  Stack,
+  Text,
+  VStack,
+  Wrap,
+  WrapItem,
+} from '@chakra-ui/react';
+import { AppList } from '@/components/AppList';
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>;
-
-//SSGの場合
-export const getStaticProps = async () => {
-  const allPostsData = getPostsData();
-  // console.log(allPostsData);
-
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};
-
-// //SSRの場合
-// export const getServerSideProps = async (/* context */) => {
-//   return {
-//     props: {
-//       //コンポーネントに渡すためのprops
-//     },
-//   };
-// };
-
-const Home: NextPage<Props> = (props) => {
-  const { allPostsData } = props;
+const Home: NextPage = () => {
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyle.headingMd}>
-        <p>
-          私はフロントエンドエンジニアで、UI/UX設計やバックエンド開発の経験もあります。得意な言語はTypeScriptです。
-        </p>
-      </section>
-      <section className={`${utilStyle.headingMd} ${utilStyle.padding1px}`}>
-        <h2>📝エンジニアのブログ</h2>
-        <div className={styles.grid}>
-          {allPostsData.map(({ id, title, date, thumbnail }) => (
-            <article key={id}>
-              <Link href={`/posts/${id}`}>
-                <img src={`${thumbnail}`} className={styles.thumbnailImage} />
-              </Link>
-              <Link href={`/posts/${id}`}>
-                <span className={utilStyle.boldText}>{title}</span>
-              </Link>
-              <br />
-              <small className={utilStyle.lightText}>{date}</small>
-            </article>
-          ))}
-        </div>
-      </section>
+      <Stack spacing={{ base: '20px', md: '40px' }}>
+        <Stack>
+          <Heading fontSize={{ base: 'lg', md: '2xl' }}>はじめに</Heading>
+
+          <Text fontSize={{ base: 'sm', md: 'md' }} ps='3'>
+            私はフロントエンドエンジニアで、実務ではVue,pug,sassを用いたフロントエンド構築やUI設計を担当しています。UX設計やウォーターフォール開発のPM経験もあり、個人ではバックエンド開発の経験もあります。得意な言語はTypeScriptです。
+          </Text>
+        </Stack>
+        <Stack>
+          <Heading fontSize={{ base: 'lg', md: '2xl' }}>技術スタック</Heading>
+          <List spacing={2} fontSize={{ base: 'sm', md: 'md' }} ps='3'>
+            <ListItem>
+              <ListIcon as={MdCheckBox} color='teal.300' />
+              <Text as='span'>HTML/CSS/PUG/Sass</Text>
+            </ListItem>
+            <ListItem>
+              <ListIcon as={MdCheckBox} color='teal.300' />
+              <Text as='span'>Javascript/Typescript/Python</Text>
+            </ListItem>
+            <ListItem>
+              <ListIcon as={MdCheckBox} color='teal.300' />
+              <Text as='span'>React/Vue/Redux/Recoil/Next.js</Text>
+            </ListItem>
+            <ListItem>
+              <ListIcon as={MdCheckBox} color='teal.300' />
+              <Text as='span'>Node.js/Express.js</Text>
+            </ListItem>
+            <ListItem>
+              <ListIcon as={MdCheckBox} color='teal.300' />
+              <Text as='span'>MongoDB/Firebase/Vercel</Text>
+            </ListItem>
+            <ListItem>
+              <ListIcon as={MdCheckBox} color='teal.300' />
+              <Text as='span'>GraphQL</Text>
+            </ListItem>
+          </List>
+        </Stack>
+        <Stack>
+          <AppList />
+        </Stack>
+      </Stack>
     </Layout>
   );
 };
